@@ -1,0 +1,27 @@
+
+mkdir #HOME/Git
+mkdir #HOME/Git/Dotfiles
+mkdir #HOME/Git/Scripts
+git init --bare $HOME/Git/Scripts
+git init --bare $HOME/Git/Dotfiles
+echo "alias git_dotfiles='/usr/bin/git --git-dir=$HOME/Git/Dotfiles/ --work-tree=$PWD'" >> #HOME/.bashrc
+echo "alias git_scripts='/usr/bin/git --git-dir=$HOME/Git/Scripts/ --work-tree=$PWD'" >> #HOME/.bashrc
+bash
+git_scripts remote add origin git@github.com:wolfee182/scripts.git
+git_dotfiles remote add origin git@github.com:wolfee182/dotfiles.git
+git_dotfiles config --local status.showUntrackedFiles no
+git_scripts config --local status.showUntrackedFiles no
+git_scripts pull origin master
+git_dotfiles pull origin master
+
+git_scripts push --set-upstream origin master
+git_dotfiles push --set-upstream origin master
+
+git_scripts status
+git_dotfiles status
+
+git_scripts add "file"
+git_dotfiles add "file"
+
+git_scripts  commit -m "commit comment"
+git_dotfiles commit -m "commit comment"
